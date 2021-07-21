@@ -1,0 +1,3 @@
+{
+    static = { "examples/", list_dir="plain" },
+}

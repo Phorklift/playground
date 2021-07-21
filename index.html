@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+  <TITLE>Phorklift Playground</TITLE>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+  
+  <SCRIPT src="playground.js"></SCRIPT>
+  
+  <STYLE TYPE="text/css">
+    textarea {
+      font-family: monospace;
+    }
+    input {
+      font-family: monospace;
+    }
+    div {
+      float: left;
+    }
+  </STYLE>
+</HEAD>
+
+<BODY>
+
+<H1>
+<A HREF="https://github.com/Phorklift/phorklift"><IMG SRC="favicon.ico" ALT="Phorklift"></A>
+Playground
+</H1>
+
+<P>
+Welcome to <A HREF="https://github.com/Phorklift/phorklift">Phorklift</A> configuration playground!
+Phorklift is an HTTP server/proxy daemon with clear, powerful and dynamic configuration.
+This playground let you to try the configuration online!
+
+<P>
+If you are here for the first time, it's better to begin with some examples.
+Select one at the <b>Examples</b> selector, <b>Upload</b> it, <b>Send</b> request
+to test, and checkout the response.
+Then try to modify them. Do not forget to <b>Upload</b> before testing.
+
+<P>
+If you want to modify more or write your own configuration, you may need to read
+some documents, including
+<A HREF="https://github.com/Phorklift/phorklift/blob/main/doc/3.conf_tutorial.md">configuration tutorial</A>,
+<A HREF="https://github.com/Phorklift/phorklift/blob/main/doc/4.conf_reference.md">configuration reference</A> and
+<A HREF="https://github.com/Phorklift/phorklift/blob/main/doc/5.lua_api_reference.md">Lua API reference</A>.
+
+You will find that a complete Phorklift configuration always
+begins with <i>Listen()</i> to define listen address. While each example here
+is just a Lua table.
+The reason is that this playground is powered by Phorklift's dynamic-Path
+configuration. All you need to provide is just a Lua table as <i>Path()</i>'s
+definition, and it's created dynamicly and run in the same Phorklift process
+with the playground itself, which is similar to service-discovery.
+You can find out how this works from its <A HREF="https://github.com/Phorklift/playground">configuration</A>,
+which is also a typical example of Phorklift's dynamic configuration.
+If you want to try a complete configuration, you have to run Phorklift yourself.
+
+<P>
+Generally speaking, the dynamic configurations are always provided by trusted source.
+You are trusted now. Do not be evil! However there are still some interesting
+challenges, such as exploring my filesystem or buiding a nested playground.
+
+<P>
+Feel free to file a Github <A HREF="https://github.com/Phorklift/phorklift/issues">issue</A>
+for any question or idea.
+<P>
+Enjoy it! 
+
+<HR>
+
+<DIV>
+<H2>1. Upload Configuration</H2>
+  <P>
+  <TEXTAREA ID="conf" ROWS="16" COLS="80" NAME="input" maxlength="4000">
+  </TEXTAREA>
+
+  <P>
+  <select ID="exampleSelect" onchange=queryExample()>
+    <option>-- Examples --</option>
+  </select>
+
+  <INPUT TYPE="button" VALUE="Reset" onclick=queryConf()>
+  <INPUT TYPE="button" VALUE="Upload" onclick=uploadConf()>
+  <INPUT TYPE="text" ID="state" style="border:none" readonly="readonly" SIZE=30>
+
+<H2>2. Send Request</H2>
+  <P>All inputs are optional here.
+
+  <P> URL: https://phorklift.org/req/<INPUT TYPE="text" ID="req_url" SIZE=35>
+  <P> Header: <INPUT TYPE="text" ID="req_hname" SIZE=10> : <INPUT TYPE="text" ID="req_hvalue">
+  <P> Body: <INPUT TYPE="text" ID="req_body" SIZE=72>
+
+  <P><INPUT TYPE="button" VALUE="Send" onclick=sendRequest()>
+</DIV>
+
+<DIV style="width:400px; padding-left:50px">
+<H2>3. Checkout Response</H2>
+  <P>Headers:
+  <TEXTAREA ID="response_headers" ROWS="8" COLS="60" readonly="readonly"> </TEXTAREA>
+  <P>Body:
+  <TEXTAREA ID="response_body" ROWS="23" COLS="60" readonly="readonly"> </TEXTAREA>
+</DIV>
+
+<HR style="clear:both">
+<P style="text-align:right; font-style:italic">Powered by Phorklift's dynamic-Path configuration.
+
+
+</BODY>
+</HTML>

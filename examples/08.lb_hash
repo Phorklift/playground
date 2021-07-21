@@ -1,0 +1,11 @@
+{
+    proxy = {{
+        "localhost:9091",
+        "localhost:9092",
+        "localhost:9093#0.1", -- weight 0.1
+        "localhost:19093",    -- this port is down
+
+        -- consistent hash, by URI.
+        hash = function() return phl.req.uri_path end,
+    }}
+}

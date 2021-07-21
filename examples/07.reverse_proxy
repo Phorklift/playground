@@ -1,0 +1,28 @@
+{
+    proxy = {{
+        "localhost:9091",
+        "localhost:9092",
+        "localhost:9093#0.1", -- weight 0.1
+        "localhost:19093",    -- this port is down
+    }}
+}
+
+--[[
+The front 3 ports (9091,9092,9093) are listened by this playground:
+
+  ```
+  Listen "127.0.0.1:9091" {
+      echo = "I am 9091.\n"
+  }
+  Listen "127.0.0.1:9092" {
+      echo = "I am 9092.\n"
+  }
+  Listen "127.0.0.1:9093" {
+      echo = "I am 9093.\n"
+  }
+  ```
+
+There are some features that can not be test on this playground,
+such as hostname resolving, health check, and failure check.
+You must have the ability to manage upstreams.
+--]]

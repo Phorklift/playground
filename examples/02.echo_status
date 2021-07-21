@@ -1,0 +1,16 @@
+{
+    echo = { "Sorry, not found!\n", status_code=404 }
+}
+
+--[[ 
+Here comment starts.
+
+`echo` accepts a table which consists of a string array member
+to define response body, and some key-value options, such as the
+`status_code` in this example.
+In last example (01.hello_world) it accepts just a string value,
+which is a syntactic sugar. See `doc/3.conf_tutorial.md` for more
+details.
+
+Here comment ends.
+--]]

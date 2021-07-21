@@ -1,0 +1,30 @@
+{
+    -- single line comment begins with '--'
+    -- `script` is more powerful than `echo`.
+    -- `phl` is a built-in Lua package. See `doc/5.lua_api.md`.
+    script = function()
+        local out = { "Request information:\n" }
+        table.insert(out, 'IP: ' .. phl.conn.client_ip .. '\n')
+        table.insert(out, 'method: ' .. phl.req.method)
+        table.insert(out, 'URI path: ' .. phl.req.uri_path)
+
+        for k,v in pairs(phl.req.uri_queries) do
+          table.insert(out, 'URI query: ' .. k .. '=' .. v)
+        end
+        for k,v in pairs(phl.req.headers) do
+          table.insert(out, k .. ': ' .. v)
+        end
+
+        local body = phl.req.body
+        if body then
+          table.insert(out, '\n' .. body)
+        end
+
+        return table.concat(out, '\n')
+    end
+}
+
+--[[
+You must define one and only one content module to generate response.
+Such as `echo`, `script`, `static`, `proxy`, etc.
+--]]

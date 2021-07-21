@@ -1,0 +1,10 @@
+{
+    limit_req = { 1, burst=5, page="too fast..." },
+
+    echo = "Press `Send` button fast!\n"
+}
+
+--[[
+You can define none or one or multiple filter modules, to process
+request or response. Such as `limit_req`, `auth_basic`, `gzip`, etc.
+--]]
