@@ -8,7 +8,7 @@ Listen "443" {
     response_internal_error = true,
     random_cookie_id = { secret="enjoy" },
 
-    -- query and upload configration
+    -- Users query and upload configration, to "user_confs/".
     Path "/conf/" {
 
         random_cookie_id = { check_mode=true },
@@ -27,7 +27,8 @@ Listen "443" {
         echo = "-- Try some examples\n"
     },
 
-    -- test request
+    -- Users send request to test their configrations.
+    -- This is where Phorklift's dynamic-Path shows its power.
     Path "/req/" {
 
         remove_matched_prefix = true,
@@ -38,13 +39,14 @@ Listen "443" {
             safe_mode = true,
             check_interval = 1,
 
+            -- create sub-Path() for each cookie-ID
             get_name = function()
-                -- create sub-Path() for each cookie-ID
                 return phl.req.get_cookie('ID')
             end,
 
+            -- load configration from "user_confs/"
             get_conf = function(name)
-                local f = io.open('user_confs/' .. name)
+                local f = io.open("user_confs/" .. name)
                 if not f then
                     return phl.HTTP_404
                 end
