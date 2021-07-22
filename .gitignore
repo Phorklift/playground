@@ -1,2 +1,4 @@
 phorklift.pid
+server.crt
+server.key
 *.log

@@ -1,8 +1,11 @@
-Listen "9090" {
-    error_log = { level="debug" },
+Listen "443" {
+    ssl = {
+        certificate = "conf/server.crt",
+        private_key = "conf/server.key",
+    },
+
     req_body_max = 4000,
     response_internal_error = true,
-
     random_cookie_id = { secret="enjoy" },
 
     -- query and upload configration
@@ -16,9 +19,7 @@ Listen "9090" {
             end,
         },
 
-        static = { "user_confs/",
-            enable_upload = true,
-        },
+        static = { "user_confs/", enable_upload=true, },
 
         jump_if = { [404] = "@first" },
     },
@@ -55,14 +56,16 @@ Listen "9090" {
     },
 
     Path "/examples/" {
-        static = { "./", list_dir="plain" },
+        remove_matched_prefix = true,
+        static = { "examples/", list_dir="plain" },
     },
 
     Path "/" {
-        static = "./",
+        static = "statics/",
     },
 }
 
+-- for test
 Listen "127.0.0.1:9091" {
     echo = "I am 9091.\n"
 }
