@@ -8,7 +8,7 @@
         table.insert(out, 'method: ' .. phl.req.method)
         table.insert(out, 'URI path: ' .. phl.req.uri_path)
 
-        for k,v in pairs(phl.req.uri_queries) do
+        for k,v in pairs(phl.req.uri_args) do
           table.insert(out, 'URI query: ' .. k .. '=' .. v)
         end
         for k,v in pairs(phl.req.headers) do

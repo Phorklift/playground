@@ -12,7 +12,7 @@
 
             -- bigger limit, bigger weight
             local weight = 1
-            local limit = phl.req.get_uri_query('limit')
+            local limit = phl.req.get_uri_arg('limit')
             if limit then
                 limit = tonumber(limit)
                 if limit > 1000 then
@@ -25,7 +25,7 @@
             -- generally, the vip level should be queried from
             -- some remote sevice, e.g. redis. we get it from
             -- request's query for easy to test.
-            local vip = phl.req.get_uri_query('vip')
+            local vip = phl.req.get_uri_arg('vip')
             if vip then
                 vip = tonumber(vip)
                 if vip > 5 then
